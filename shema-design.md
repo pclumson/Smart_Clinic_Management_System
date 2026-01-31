@@ -87,6 +87,85 @@ Create a section in your file titled:
 - patient_id: INT, Foreign Key → patients(id)
 - appointment_time: DATETIME, Not Null
 - status: INT (0 = Scheduled, 1 = Completed, 2 = Cancelled)
+  
+
+java
+@Entity
+public class Admin {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @NotNull(message = "Username cannot be null")
+    private String username;
+
+    @NotNull
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+
+    // Getters and setters
+}
+
+
+java
+@Entity
+public class Doctor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotNull
+    @Size(min = 3, max = 100)
+    private String name;
+
+    @NotNull
+    @Size(min = 3, max = 50)
+    private String specialty;
+
+    @Email
+    @NotNull
+    private String email;
+
+    @Size(min = 6)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+
+    @Pattern(regexp = "\\d{10}")
+    private String phone;
+
+    @ElementCollection
+    private List<String> availableTimes;
+}
+
+
+java
+@Entity
+public class Appointment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @NotNull
+    private Doctor doctor;
+
+    @ManyToOne
+    @NotNull
+    private Patient patient;
+
+    @Future
+    private LocalDateTime appointmentTime;
+
+    private int status; // 0 = Scheduled, 1 = Completed
+
+    @Transient
+    public LocalDateTime getEndTime() {
+        return appointmentTime.plusHours(1);
+    }
+}
 
 Consider defining the structure of other tables in the format as per the given example. 
 
@@ -145,6 +224,27 @@ In the markdown file, create a section titled:
   }
 }
 **Think deeper:**
+
+java
+@Document(collection = "prescriptions")
+public class Prescription {
+    @Id
+    private String id;
+
+    @NotNull
+    @Size(min = 3, max = 100)
+    private String patientName;
+
+    @NotNull
+    private Long appointmentId;
+
+    @NotNull
+    @Size(min = 3, max = 100)
+    private String medication;
+
+    @Size(max = 200)
+    private String doctorNotes;
+}
 
 - Should MongoDB documents include the full patient object or just an ID?
 - What would a chat message document look like?
