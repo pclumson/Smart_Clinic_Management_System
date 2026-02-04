@@ -24,6 +24,12 @@ This is the capstone project for the [IBM Java Developer Certification Course on
 - **Docker**: For containerization (via `Dockerfile`).
 
 ## Project Structure
+<img width="1920" height="1080" alt="Screenshot_20260131_005300" src="https://github.com/user-attachments/assets/0af9d116-3ed0-47c3-82b7-cfb7db1deb89" />
+
+
+
+
+
 ```
 java-database-capstone/
 ├── .github/                    # GitHub workflows for CI/CD
