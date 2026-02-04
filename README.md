@@ -112,3 +112,13 @@ java-database-capstone/
 6. **Run with Docker**:
    - Build the Docker image: `docker build -t java-database-capstone .`.
    - Run the container: `docker run -p 8080:8080 java-database-capstone`.
+  <img width="792" height="404" alt="Screenshot_20260204_102158" src="https://github.com/user-attachments/assets/349ac97d-4016-425d-9338-b9cbe6678c31" />
+  
+  <img width="791" height="407" alt="Screenshot_20260204_102238" src="https://github.com/user-attachments/assets/dc47b311-4b61-4f54-adc6-ef9811205cc3" />
+
+
+
+
+
+
+   - 
